@@ -1,10 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import fakeDbEvents from './assets/fakeEvents.json';
+import { useState , useEffect} from 'react'
+import WorldMap from './map/WorldMap';
+// import reactLogo from './assets/react.svg'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [coords, setCorrds] = useState({
+    latitude: "",
+    longitude: ""
+  });
+
+ const [display_name, setName] = useState("");
+ const [address, setAddress] = useState({});
 
   return (
     <div className="App">
@@ -18,7 +25,7 @@ function App() {
           </select>
         <span>Time of the foriegn coutry</span>
        </section>
-       <section>Map</section>
+       <section><WorldMap /></section>
     </div>
   )
 }
