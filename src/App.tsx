@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import fakeDbEvents from './assets/fakeEvents.json';
 import './App.css'
 
 function App() {
@@ -7,17 +8,17 @@ function App() {
 
   return (
     <div className="App">
-      <div>local time: <span>{ Date()}</span></div>
-       <div>UTC time<span>Display UTC time</span></div>
-       <div>Foriegn time: 
-        <select>
-          <option>select a country</option>
-          <option>india</option>
-          <option>Uk</option>
-          <option>Argentina</option>
-        </select>
-       <span>Display the time of the foriegn coutry</span>
-       </div>
+      <section><span>current location</span><span>current Date and time</span></section>
+      <section>Foriegn city 
+          <select>
+            <option>select a country</option>
+            <option>india</option>
+            <option>Uk</option>
+            <option>Argentina</option>
+          </select>
+        <span>Time of the foriegn coutry</span>
+       </section>
+       <section>Map</section>
     </div>
   )
 }
