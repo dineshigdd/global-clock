@@ -1,8 +1,10 @@
 import { useState , useEffect} from 'react'
+import { Wrapper, Section } from './Styles';
 import WorldMap from './map/WorldMap';
+// import { Section } from  './App';
 // import reactLogo from './assets/react.svg'
 
-import './App.css'
+
 
 function App() {
   const [coords, setCorrds] = useState({
@@ -12,11 +14,20 @@ function App() {
 
  const [display_name, setName] = useState("");
  const [address, setAddress] = useState({});
+ const [ currentDateAndTime, setCurrentDateAndTime ] = useState();
 
+//  useEffect(()=>{
+//     const date = new Date();
+//     setCurrentDateAndTime( date );
+//  },[]);
   return (
-    <div className="App">
-      <section><span>current location</span><span>current Date and time</span></section>
-      <section>Foriegn city 
+    <Wrapper className="App">
+      <Section>
+        <span>Current Location & Time</span>
+        <span>{ currentDateAndTime }</span>
+      </Section>
+     
+      <Section><span>Foriegn city </span>
           <select>
             <option>select a country</option>
             <option>india</option>
@@ -24,9 +35,12 @@ function App() {
             <option>Argentina</option>
           </select>
         <span>Time of the foriegn coutry</span>
-       </section>
-       <section><WorldMap /></section>
-    </div>
+       </Section>
+      <Section>
+        <WorldMap />
+      </Section>
+      
+    </Wrapper>
   )
 }
 

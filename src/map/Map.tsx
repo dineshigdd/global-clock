@@ -1,8 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import React from "react";
 import "leaflet/dist/leaflet.css";
 import icon from "../assets/icon.png";
 import L from 'leaflet';
+import styled from "styled-components";
 
 interface MapInput {
   coords: any;
@@ -34,7 +34,7 @@ export default function Map( props: MapInput ) {
   }
 
   return (
-    <MapContainer
+    <StyledMapContainer
       className="map"
       center={[ mapcoords.latitude, mapcoords.longitude]}
       zoom={10}
@@ -48,6 +48,11 @@ export default function Map( props: MapInput ) {
         <Popup>{ props.display_name }</Popup>
       </Marker>
       <MapView />
-    </MapContainer>
+    </StyledMapContainer>
   );
 }
+
+
+const StyledMapContainer = styled(MapContainer)`  
+    padding:0px 50px;
+`;

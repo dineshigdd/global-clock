@@ -39,3 +39,43 @@
 .read-the-docs {
   color: #888;
 } */
+
+// import styled from "styled-components";
+
+
+
+// export const Section = styled.section`
+//     display: flex;
+
+// `
+
+import styled from "styled-components";
+
+export  const Wrapper = styled.div`
+ display:flex;
+ flex-direction: column;
+  span{
+    margin: 10px;
+    padding: 2px 5px;
+  }
+
+  select{
+    margin:5px 15px;
+    padding:2px;
+  }
+  
+`;
+
+export const Section = styled.section`
+    display: flex;
+    margin: auto 0px;
+
+    .WorldMap{
+      margin: 10px 70px;
+      overflow-x:hidden;
+      height: 85vh;
+    }
+
+    
+`;
+

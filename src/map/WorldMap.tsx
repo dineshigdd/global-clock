@@ -1,6 +1,6 @@
 import Map from "./Map";
 import { useEffect, useState } from "react";
-
+import { Section, Wrapper } from "../Styles";
 
 export default function WorldMap() {
 
@@ -123,7 +123,7 @@ export default function WorldMap() {
   }
 
   return (
-    <div className="WorldMap">
+    <Wrapper className="WorldMap">
       {/* <h1>Enter The address</h1>
       <section className="form-container">
         <form>
@@ -175,6 +175,6 @@ export default function WorldMap() {
         </form>
       </section> */}
       <Map coords={coords} display_name={ display_name} />
-    </div>
+    </Wrapper>
   );
 }
