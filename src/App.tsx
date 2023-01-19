@@ -14,7 +14,7 @@ function App() {
 
  const [display_name, setName] = useState("");
  const [address, setAddress] = useState({});
- const [ currentDateAndTime, setCurrentDateAndTime ] = useState();
+ const [ currentDateAndTime, setCurrentDateAndTime ] = useState<string>( new Date().toString());
 
 //  useEffect(()=>{
 //     const date = new Date();
