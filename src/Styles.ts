@@ -54,14 +54,10 @@ import styled from "styled-components";
 export  const Wrapper = styled.div`
  display:flex;
  flex-direction: column;
-  span{
-    margin: 10px;
-    padding: 2px 5px;
-  }
 
-  select{
-    margin:5px 15px;
-    padding:2px;
+  .currentLocation{
+    margin: 10px 0 10px 70px; 
+    padding: 2px 5px;
   }
   
 `;

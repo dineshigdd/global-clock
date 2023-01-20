@@ -112,30 +112,31 @@ export default function WorldMap() {
     e.preventDefault();
     console.log(address);
 
-    let url = `https://nominatim.openstreetmap.org/search?
+    let url = `https://nominatim.openstreetmap.org/search?city=${address.city}&format=json`;
+    
+    /*let url = `https://nominatim.openstreetmap.org/search?
     street=${address.street}
     &city=${address.city}
     &state=${address.state}
     &country=${address.country}
-    &postalcode=${address.postalcode}&format=json`;
+    &postalcode=${address.postalcode}&format=json`;*/
 
     getData(url);
   }
 
   return (
     <Wrapper className="WorldMap">
-      {/* <h1>Enter The address</h1>
-      <section className="form-container">
+       <Section className="form-container">
         <form>
-          <label>street:</label>
+          {/* <label>street:</label>
           <input
             value={address.street}
             placeholder="1234 abc street"
             onChange={update("street")}
             id="street"
             type="text"
-          />
-          <label>city:</label>
+          /> */}
+          <label>Enter the city </label>
           <input
             placeholder="Los Angeles"
             type="text"
@@ -143,7 +144,7 @@ export default function WorldMap() {
             onChange={update("city")}
             id="city"
           />
-          <br />
+          {/* <br />
           <label>State:</label>
           <input
             placeholder="CA / California"
@@ -169,11 +170,11 @@ export default function WorldMap() {
             onChange={update("country")}
             id="country"
           />
-          <br />
+          <br /> */}
 
           <button onClick={(e) => submitHandler(e)}>Search</button>
         </form>
-      </section> */}
+      </Section>
       <Map coords={coords} display_name={ display_name} />
     </Wrapper>
   );

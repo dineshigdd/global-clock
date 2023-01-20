@@ -37,7 +37,7 @@ export default function Map( props: MapInput ) {
     <StyledMapContainer
       className="map"
       center={[ mapcoords.latitude, mapcoords.longitude]}
-      zoom={10}
+      zoom={2}
       scrollWheelZoom={true}
     >
       <TileLayer

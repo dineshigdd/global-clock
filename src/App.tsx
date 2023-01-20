@@ -1,4 +1,4 @@
-import { useState , useEffect} from 'react'
+import { useState , useEffect, useRef} from 'react'
 import { Wrapper, Section } from './Styles';
 import WorldMap from './map/WorldMap';
 // import { Section } from  './App';
@@ -13,8 +13,10 @@ function App() {
   });
 
  const [display_name, setName] = useState("");
- const [address, setAddress] = useState({});
+ const [city, setCity ] = useState<string>();
  const [ currentDateAndTime, setCurrentDateAndTime ] = useState<string>( new Date().toString());
+
+
 
 //  useEffect(()=>{
 //     const date = new Date();
@@ -23,19 +25,20 @@ function App() {
   return (
     <Wrapper className="App">
       <Section>
-        <span>Current Location & Time</span>
-        <span>{ currentDateAndTime }</span>
+        <span className='currentLocation'>Current Location & Time</span>
+        <span className='currentLocation'>{ currentDateAndTime }</span>
       </Section>
      
-      <Section><span>Foriegn city </span>
-          <select>
+      {/* <Section><span>Foriegn city </span> */}
+        
+          {/* <select>
             <option>select a country</option>
             <option>india</option>
             <option>Uk</option>
             <option>Argentina</option>
-          </select>
-        <span>Time of the foriegn coutry</span>
-       </Section>
+          </select> */}
+        {/* <span>Time of the foriegn coutry</span> */}
+       {/* </Section> */}
       <Section>
         <WorldMap />
       </Section>
