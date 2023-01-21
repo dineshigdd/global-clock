@@ -5,8 +5,8 @@ import { Section, Wrapper } from "../Styles";
 export default function WorldMap() {
 
   const [coords, setCorrds] = useState({
-    latitude: "",
-    longitude: ""
+    latitude: 0,
+    longitude:0
   });
 
   const [display_name, setName] = useState("");
@@ -61,8 +61,7 @@ export default function WorldMap() {
       longitude: position.coords.longitude
     });
     
-    let url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2" +
-      "&lat=" + coords.latitude + "&lon=" + coords.longitude;
+    let url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.latitude}&lon=${ coords.longitude }`;
       
     fetch(url, {
       method: "GET",
@@ -72,7 +71,7 @@ export default function WorldMap() {
       }
     })
       .then((response) => response.json())
-      .then((data) => setName(data.display_name));
+      .then((data) => setName( `${ data.address.city }, ${ data.address.country }` ));
   }
 
   //get input from text fields and append it to address object

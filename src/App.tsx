@@ -7,13 +7,8 @@ import WorldMap from './map/WorldMap';
 
 
 function App() {
-  const [coords, setCorrds] = useState({
-    latitude: "",
-    longitude: ""
-  });
 
- const [display_name, setName] = useState("");
- const [city, setCity ] = useState<string>();
+
  const [ currentDateAndTime, setCurrentDateAndTime ] = useState<string>( new Date().toString());
 
 
