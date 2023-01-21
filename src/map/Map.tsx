@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import icon from "../assets/icon.png";
 import L from 'leaflet';
 import styled from "styled-components";
+import {  useState } from "react";
 
 interface MapInput {
   coords: any;
@@ -19,7 +20,9 @@ export default function Map( props: MapInput ) {
 
  
   const mapcoords : MapCoords = props.coords ;
-
+  const [ timeZone, setTimeZone ] = useState<string>( 'America/Los_Angeles');
+  
+  
   const customIcon = new L.Icon({//creating a custom icon to use in Marker
     iconUrl: icon,
     iconSize: [25, 35],
@@ -33,6 +36,23 @@ export default function Map( props: MapInput ) {
     return null;
   }
 
+
+  function getTime(){
+      const currntDateTime = new Date();
+      return currntDateTime.toLocaleString('en-US', { timeZone: timeZone });    
+  }
+
+  const requestOptions = {
+    method: 'GET',
+  };
+  
+
+  fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${ mapcoords.latitude }&lon=${ mapcoords.longitude }&apiKey=b0f154e5c5e740f59de754920300a457`, requestOptions)
+    .then(response => response.json())
+    .then(result => setTimeZone(result.features[0].properties.timezone.name ))
+    .catch(error => console.log('error', error));
+
+    
   return (
     <StyledMapContainer
       className="map"
@@ -45,7 +65,7 @@ export default function Map( props: MapInput ) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker icon={customIcon} position={[ mapcoords.latitude, mapcoords.longitude]}>
-        <Popup>{ props.display_name }</Popup>
+        <Popup>{ `${ props.display_name } \n  ${ getTime() }` }</Popup>
       </Marker>
       <MapView />
     </StyledMapContainer>

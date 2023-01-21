@@ -54,9 +54,10 @@ import styled from "styled-components";
 export  const Wrapper = styled.div`
  display:flex;
  flex-direction: column;
+ padding-top: 10px;
 
   .currentLocation{
-    margin: 10px 0 10px 70px; 
+    margin: 10px 0 10px 65px; 
     padding: 2px 5px;
   }
   
@@ -72,6 +73,19 @@ export const Section = styled.section`
       height: 85vh;
     }
 
-    
+    form{
+      margin: -10px 0 15px 0;
+    }
+
+    input , button{
+      padding:5px;
+      border:solid lightgray 1px;
+      border-radius: 5px;
+
+    }
+
+    button{
+      cursor: pointer;
+    }
 `;
 
