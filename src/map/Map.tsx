@@ -5,7 +5,7 @@ import L from 'leaflet';
 import styled from "styled-components";
 import {  useState } from "react";
 
-interface MapInput {
+interface MapInput { 
   coords: any;
   display_name: string;
 };
@@ -15,12 +15,22 @@ interface MapCoords {
   longitude :number;
 };
 
+interface CurrentLocation {
+  latitude:number
+  longitude:number,
+  display_name:string
+}
 
-export default function Map( props: MapInput ) {
+interface props {
+  currentLocation: CurrentLocation,
+  location: MapInput
+}
 
- 
-  const mapcoords : MapCoords = props.coords ;
-  const [ timeZone, setTimeZone ] = useState<string>( 'America/Los_Angeles');
+export default function Map( { currentLocation , location }: props) {
+
+  const currentCity:CurrentLocation = currentLocation;
+  const mapcoords : MapCoords = location.coords ;
+  const [ timeZone, setTimeZone ] = useState<string>();
   
   
   const customIcon = new L.Icon({//creating a custom icon to use in Marker
@@ -64,9 +74,17 @@ export default function Map( props: MapInput ) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker icon={customIcon} position={[ mapcoords.latitude, mapcoords.longitude]}>
-        <Popup>{ `${ props.display_name } \n  ${ getTime() }` }</Popup>
+
+       <Marker icon={customIcon} position={[ currentCity.latitude , currentCity.longitude ]}>
+        <Popup>{ `${ currentCity.display_name } \n  ${ getTime() }` }</Popup>
       </Marker>
+
+       { !( mapcoords.latitude == 0 &&   mapcoords.longitude == 0 )? (
+      <Marker icon={customIcon} position={[ mapcoords.latitude, mapcoords.longitude]}>
+        <Popup>{ `${ location.display_name } \n  ${ getTime() }` }</Popup>
+      </Marker>
+      ): ''
+        }
       <MapView />
     </StyledMapContainer>
   );

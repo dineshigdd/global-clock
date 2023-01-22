@@ -4,6 +4,14 @@ import { Section, Wrapper } from "../Styles";
 
 export default function WorldMap() {
 
+
+  
+  const [ currentLocation, setCurrentLocation ] = useState({
+    latitude: 0,
+    longitude:0,
+    display_name: '',
+  });
+
   const [coords, setCorrds] = useState({
     latitude: 0,
     longitude:0
@@ -55,23 +63,27 @@ export default function WorldMap() {
   };
 
   //get current location when the app loads for the first time
-  function getCurrentCityName(position : any) {
-    setCorrds({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    });
-    
-    let url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.latitude}&lon=${ coords.longitude }`;
+  function getCurrentCityName(position : any) {  
       
-    fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => setName( `${ data.address.city }, ${ data.address.country }` ));
+    
+      let url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=
+          ${ position.coords.latitude }&lon=${ position.coords.longitude }`;
+      
+      fetch(url, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => setName( `${ data.address.city }, ${ data.address.country }` ));
+
+        setCurrentLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          display_name:display_name
+        });
   }
 
   //get input from text fields and append it to address object
@@ -174,7 +186,9 @@ export default function WorldMap() {
           <button onClick={(e) => submitHandler(e)}>Search</button>
         </form>
       </Section>
-      <Map coords={coords} display_name={ display_name} />
+      <Map 
+      currentLocation = { currentLocation } 
+      location = {{ coords, display_name }} />
     </Wrapper>
   );
 }
