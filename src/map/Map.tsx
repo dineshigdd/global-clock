@@ -57,7 +57,8 @@ export default function Map( { currentLocation , location }: props) {
   };
   
 
-  fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${ mapcoords.latitude }&lon=${ mapcoords.longitude }&apiKey=b0f154e5c5e740f59de754920300a457`, requestOptions)
+  fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${ mapcoords.latitude }&lon=${ mapcoords.longitude }
+  &apiKey=b0f154e5c5e740f59de754920300a457`, requestOptions)
     .then(response => response.json())
     .then(result => setTimeZone(result.features[0].properties.timezone.name ))
     .catch(error => console.log('error', error));
