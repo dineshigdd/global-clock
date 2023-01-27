@@ -2,6 +2,7 @@ import Map from "./map/Map";
 import { useEffect, useState } from "react";
 import { Section, Wrapper } from "./Styles";
 
+
 export default function WorldMap() {
 
   const [ currentDateAndTime, setCurrentDateAndTime ] = useState<string>( new Date().toString());
@@ -132,15 +133,16 @@ export default function WorldMap() {
     &postalcode=${address.postalcode}&format=json`;*/
 
     getData(url);
+    
   }
 
   
 
   return (
-    <Wrapper className="WorldMap">
+    <Wrapper>
       <Section>
-        <div className='currentLocation'><span>Current Location </span> { currentLocation.display_name }</div>
-        <div className='currentLocation'><span>Time</span> { currentDateAndTime }</div>
+        <div className='currentLocation'><span>Current Location : </span> { currentLocation.display_name }</div>
+        <div className='currentLocation'><span>Time :</span> { currentDateAndTime }</div>
       </Section>
        <Section className="form-container">
         <form>         
@@ -156,9 +158,14 @@ export default function WorldMap() {
           <button onClick={(e) => submitHandler(e)}>Search</button>
         </form>
       </Section>
-      <Map 
-      currentLocation = { currentLocation } 
-      location = {{ coords, display_name }} />
+      <Section >    
+        <div  className="WorldMap">  
+          <Map 
+             currentLocation = { currentLocation } 
+             location = {{ coords, display_name }} 
+             />
+        </div>        
+      </Section>
     </Wrapper>
   );
 }

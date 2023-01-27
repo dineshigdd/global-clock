@@ -56,11 +56,20 @@ export  const Wrapper = styled.div`
  flex-direction: column;
  padding-top: 10px;
 
-  .currentLocation{
+  .currentLocation, label{
     margin: 10px 0 10px 65px; 
-    padding: 2px 5px;
+    padding: 5px 5px; 
+    color: #3b4241;
   }
   
+  .currentLocation > :first-child{
+    color: red;
+  }
+
+  label, span {
+    color: #2f4f4f;
+    font-weight: bold;
+  }
 `;
 
 export const Section = styled.section`
@@ -69,19 +78,25 @@ export const Section = styled.section`
 
     .WorldMap{
       margin: 10px 70px;
-      overflow-x:hidden;
+      overflow:hidden;
       height: 85vh;
+      /* background-color: #AAD3DF; */ //enabled this if transformation is enabled
+    }
+    
+    .leaflet-container{
+      background-color: inherit;
+      
     }
 
-    form{
-      margin: -10px 0 15px 0;
+    .leaflet-pane {
+      transform: none !important; //stops transform: translate3d(211px, 127px, 0px) (by defaut it is enabled)
     }
 
     input , button{
       padding:5px;
       border:solid lightgray 1px;
       border-radius: 5px;
-
+      color: #3b4241;
     }
 
     button{

@@ -1,9 +1,9 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup,CircleMarker, useMap  } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import icon from "../assets/icon.png";
 import L from 'leaflet';
 import styled from "styled-components";
-import {  useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 
 interface MapInput { 
   coords: any;
@@ -31,7 +31,7 @@ export default function Map( { currentLocation , location }: props) {
   const currentCity:CurrentLocation = currentLocation;
   const mapcoords : MapCoords = location.coords ;
   const [ timeZone, setTimeZone ] = useState<string>();
-  
+  const markerRef = useRef<L.Marker>(null);
   
   const customIcon = new L.Icon({//creating a custom icon to use in Marker
     iconUrl: icon,
@@ -56,6 +56,13 @@ export default function Map( { currentLocation , location }: props) {
     method: 'GET',
   };
   
+  useEffect(() => {
+    if (markerRef.current) {
+      markerRef.current.bindPopup( `${ location.display_name } \n  ${ getTime() }` ).openPopup();
+    
+    }
+  }, [ markerRef.current ]);
+
 
   fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${ mapcoords.latitude }&lon=${ mapcoords.longitude }
   &apiKey=b0f154e5c5e740f59de754920300a457`, requestOptions)
@@ -68,21 +75,20 @@ export default function Map( { currentLocation , location }: props) {
     <StyledMapContainer
       className="map"
       center={[ mapcoords.latitude, mapcoords.longitude]}
-      zoom={2}
-      scrollWheelZoom={true}
+      zoom={2.4}
+      scrollWheelZoom={false}    //map can't be zoomed with mouse        
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-       <Marker icon={customIcon} position={[ currentCity.latitude , currentCity.longitude ]}>
+       <CircleMarker radius={10} center={[ currentCity.latitude , currentCity.longitude ]}  pathOptions={ { color: 'red'} }>
         <Popup>{ `${ currentCity.display_name } \n  ${ getTime() }` }</Popup>
-      </Marker>
+      </CircleMarker>
 
        { !( mapcoords.latitude == 0 &&   mapcoords.longitude == 0 )? (
-      <Marker icon={customIcon} position={[ mapcoords.latitude, mapcoords.longitude]}>
-        <Popup>{ `${ location.display_name } \n  ${ getTime() }` }</Popup>
+      <Marker ref={markerRef} icon={customIcon} position={[ mapcoords.latitude, mapcoords.longitude]}>        
       </Marker>
       ): ''
         }
